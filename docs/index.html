@@ -1,0 +1,149 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <title>股票小助手</title>
+    <link href="common.css" rel="stylesheet">
+    <!--<script src="https://unpkg.com/lodash@4.16.6"></script>-->
+  </head>
+  <body>
+    <div node-type="page1" class="page1 bg4">
+      <div class="lineText">终极价值投资实践工具系列</div>          
+      <div class="title">选股</div>      
+      <div class="title2">超级小能手</div>      
+      <div class="startBtn" node-type="startBtn">开始</div>      
+    </div>
+
+    <div node-type="page2"  class="page2 bg4 myHide">
+      <div class="bar">
+        <div class="tabBox">
+          <div class="tab tab1 active">全部</div><div class="tab tab2">符合</div><div class="tab tab3">不符合</div> 
+        </div>        
+        <div class="add bg9" node-type="add">+</div>
+      </div>  
+
+      <div class="wu myHide">暂无数据</div>
+
+      <div class="lists">
+        <!-- <div class="item">
+          <div class="floatL">中国神华（2016/1/6）</div>
+          <div class="floatR">删除</div>
+          <div class="blankBox"></div>
+        </div> -->          
+      </div>
+    </div>
+
+
+    <div node-type="page3"  class="page3 myHide">
+      <div class="bar">
+        <div class="back back1">返回</div>
+        <div class="edit bg9" node-type="stockEdit" name="">编辑</div>
+        <div class="name" node-type="stockName">-</div>
+      </div>  
+
+      <div class="result bg6" node-type="isOK">
+        <div class="t2 MT20">均值<span node-type="average">56%<span></div>
+        <div class="t1">符合标准</div>
+      </div>    
+
+      <div class="result bg3 myHide" node-type="isNotOK">
+        <div class="t3">不符合标准</div>
+      </div>    
+
+      <div>
+        <div class="chart">
+          <div class="end bg4"></div>
+          <div class="start"></div>
+          <div class="y y1 bg9"><div class="qiu bg9"></div></div>
+          <div class="y y2 bg5"><div class="qiu bg5"></div></div>
+          <div class="y y3 bg8"><div class="qiu bg8"></div></div>
+          <div class="y y4 bg1"><div class="qiu bg1"></div></div>
+          <div class="y y5 bg3"><div class="qiu bg3"></div></div>
+          <div class="y y6 bg11"><div class="qiu bg11"></div></div>
+        </div>        
+      </div>
+
+      <div class="mapBox MT40">
+        <div class="map">
+          <div class="mapItem bg9"></div>
+          <div>1年内</div>
+          <div node-type="v1">33%</div>
+        </div>
+        <div class="map">
+          <div class="mapItem bg5"></div>
+          <div>2年内</div>
+          <div node-type="v2">33%</div>
+        </div>
+        <div class="map">
+          <div class="mapItem bg8"></div>
+          <div>3年内</div>
+          <div node-type="v3">33%</div>
+        </div>
+        <div class="map">
+          <div class="mapItem bg1"></div>
+          <div>4年内</div>
+          <div node-type="v4">33%</div>
+        </div>
+        <div class="map">
+          <div class="mapItem bg3"></div>
+          <div>5年内</div>
+          <div node-type="v5">33%</div>
+        </div>
+        <div class="map">
+          <div class="mapItem bg11"></div>
+          <div>6年内</div>
+          <div node-type="v6">33%</div>
+        </div>
+      </div>
+
+      <!-- <div class="lists">
+      </div> -->
+    </div>
+
+    <div node-type="page4"  class="page4 myHide">
+      <div class="bar">
+        <div class="back back2" >返回</div>
+        <div class="name" node-type="add/edit">添加股票</div>
+      </div>
+      <div class="addBox">
+        <div class="line">
+            <input node-type="addName" class="myInput" type="text" value="" placeholder="股票名称">  
+        </div>
+        <div class="line">
+            <input node-type="addPrice" class="myInput" type="number" value="" placeholder="当前每股市价">  
+        </div>
+        <div class="line">
+            <input node-type="addLow1" class="myInput" type="number" value="" placeholder="低点1">  
+        </div>
+        <div class="line">
+            <input node-type="addLow2" class="myInput" type="number" value="" placeholder="低点2">  
+        </div>
+        <div class="line">
+            <input node-type="addLow3" class="myInput" type="number" value="" placeholder="低点3">  
+        </div>
+        <div class="line">
+            <input node-type="addLow4" class="myInput" type="number" value="" placeholder="低点4">  
+        </div>
+        <div class="line">
+            <input node-type="addLow5" class="myInput" type="number" value="" placeholder="低点5">  
+        </div>
+        <div class="line">
+            <input node-type="addLow6" class="myInput" type="text" value="" placeholder="低点6">  
+        </div>
+      </div>
+
+      <div class="okBtn">
+        提交
+      </div>
+
+      
+    </div>
+
+
+
+    <!--<script src="app/index.js"></script>-->
+    <script src="dist/bundle.js"></script>
+  </body>
+</html>
+
+
