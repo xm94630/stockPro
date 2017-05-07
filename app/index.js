@@ -53,6 +53,30 @@ function randerData(type,data){
         $('[node-type="page3"]').show();
         detail(name);
     })
+    //删除
+    $('[node-type="del"]').each(function(i){
+        $(this).on('click',function(e){
+            e.stopPropagation();
+            var name = $(this).attr('name');
+            var a=confirm("确认要删除？");
+            if(a==true){
+                var stockData;
+                for(var i=0;i<data.length;i++){
+                    if(data[i].name==name){
+                        data.splice(i,1);
+                    }
+                }
+                $('[node-type="more"]').each(function(){
+                    if($(this).attr('name')==name){
+                        $(this).remove();
+                    }
+                })
+                if($('[node-type="more"]').length==0){
+                    $('.wu').show();
+                }
+            }
+        })
+    })
 }
 
 function detail(name){
@@ -207,30 +231,23 @@ $('.okBtn').on('click',function(){
     var index;
     for(var i=0;i<data.length;i++){
         if(data[i].name==name){
-            l(1)
             isEdit = true;
             index=i;
             break;
         }else{
-            l(2)
             isEdit = false;
         }
     }
     if(isEdit){
-        l(11)
-        l(object)
         data[i] = object;
     }else{
-        l(222)
         data.push(object);
     }
 
-    l(data);
 
     $('[node-type="page2"]').show();
     $('[node-type="page4"]').hide();
 });
-
 
 
 

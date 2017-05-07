@@ -131,6 +131,30 @@ function randerData(type, data) {
         (0, _jquery2.default)('[node-type="page3"]').show();
         detail(name);
     });
+    //删除
+    (0, _jquery2.default)('[node-type="del"]').each(function (i) {
+        (0, _jquery2.default)(this).on('click', function (e) {
+            e.stopPropagation();
+            var name = (0, _jquery2.default)(this).attr('name');
+            var a = confirm("确认要删除？");
+            if (a == true) {
+                var stockData;
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].name == name) {
+                        data.splice(i, 1);
+                    }
+                }
+                (0, _jquery2.default)('[node-type="more"]').each(function () {
+                    if ((0, _jquery2.default)(this).attr('name') == name) {
+                        (0, _jquery2.default)(this).remove();
+                    }
+                });
+                if ((0, _jquery2.default)('[node-type="more"]').length == 0) {
+                    (0, _jquery2.default)('.wu').show();
+                }
+            }
+        });
+    });
 }
 
 function detail(name) {
@@ -294,25 +318,18 @@ function detail(name) {
     var index;
     for (var i = 0; i < data.length; i++) {
         if (data[i].name == name) {
-            l(1);
             isEdit = true;
             index = i;
             break;
         } else {
-            l(2);
             isEdit = false;
         }
     }
     if (isEdit) {
-        l(11);
-        l(object);
         data[i] = object;
     } else {
-        l(222);
         data.push(object);
     }
-
-    l(data);
 
     (0, _jquery2.default)('[node-type="page2"]').show();
     (0, _jquery2.default)('[node-type="page4"]').hide();
