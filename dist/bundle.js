@@ -121,7 +121,10 @@ function randerData(type, data) {
     }
     var html = '';
     for (var i = 0; i < data.length; i++) {
-        html += ['<div node-type="more" name="' + data[i].name + '" class="item">', '<div class="floatL">' + data[i].name + ' ' + data[i].result + '%（' + data[i].date + ')' + '</div>', '<div class="floatR" node-type="del" name="' + data[i].name + '">删除</div>', '<div class="blankBox"></div>', '</div>'].join('');
+
+        var p = data[i].isOK ? data[i].result + '%' : '不合格';
+
+        html += ['<div node-type="more" name="' + data[i].name + '" class="item">', '<div class="floatL">' + data[i].name + ' ' + p + '（' + data[i].date + ')' + '</div>', '<div class="floatR" node-type="del" name="' + data[i].name + '">删除</div>', '<div class="blankBox"></div>', '</div>'].join('');
     }
     (0, _jquery2.default)('.lists').html('').append(html);
 
@@ -176,7 +179,7 @@ function detail(name) {
     (0, _jquery2.default)('[node-type="stockName"]').text(stockData.name);
     (0, _jquery2.default)('[node-type="average"]').text(stockData.result + "%");
     (0, _jquery2.default)('.end').css({ width: stockData.max < 100 ? stockData.max + '%' : '100%' });
-    (0, _jquery2.default)('.start').css({ width: stockData.min + '%' });
+    (0, _jquery2.default)('.start').css({ width: stockData.min < 100 ? stockData.min + '%' : '100%' });
     var percent = stockData.percent;
     var a1 = percent.split('|')[0];
     var a2 = percent.split('|')[1];
@@ -219,9 +222,10 @@ function detail(name) {
 });
 (0, _jquery2.default)((0, _jquery2.default)('.bar .tab')[0]).trigger('click');
 
-(0, _jquery2.default)('.back').on('click', function () {
+(0, _jquery2.default)('.back1').on('click', function () {
     (0, _jquery2.default)('[node-type="page2"]').show();
     (0, _jquery2.default)('[node-type="page3"]').hide();
+    (0, _jquery2.default)('.tab.active').trigger('click');
 });
 
 (0, _jquery2.default)('[node-type="add"]').on('click', function (e, editName) {
@@ -238,7 +242,7 @@ function detail(name) {
                 stockData = JSON.parse(JSON.stringify(data[i]));
             }
         }
-        (0, _jquery2.default)('[node-type="addName"]').val(stockData.name);
+        (0, _jquery2.default)('[node-type="addName"]').val(stockData.name).attr('disabled', 'disabled');
         (0, _jquery2.default)('[node-type="addPrice"]').val(stockData.nowPrice);
         var arr = stockData.price.split('|');
         (0, _jquery2.default)('[node-type="addLow1"]').val(arr[0]);
@@ -248,7 +252,7 @@ function detail(name) {
         (0, _jquery2.default)('[node-type="addLow5"]').val(arr[4]);
         (0, _jquery2.default)('[node-type="addLow6"]').val(arr[5]);
     } else {
-        (0, _jquery2.default)('[node-type="addName"]').val('');
+        (0, _jquery2.default)('[node-type="addName"]').val('').removeAttr("disabled");
         (0, _jquery2.default)('[node-type="addPrice"]').val('');
         (0, _jquery2.default)('[node-type="addLow1"]').val('');
         (0, _jquery2.default)('[node-type="addLow2"]').val('');
@@ -331,8 +335,27 @@ function detail(name) {
         data.push(object);
     }
 
-    (0, _jquery2.default)('[node-type="page2"]').show();
     (0, _jquery2.default)('[node-type="page4"]').hide();
+    (0, _jquery2.default)('[node-type="page2"]').show();
+    (0, _jquery2.default)('.tab.active').trigger('click');
+    (0, _jquery2.default)('[node-type="more"]').each(function () {
+        if ((0, _jquery2.default)(this).attr('name') == name) {
+            (0, _jquery2.default)(this).trigger('click');
+        }
+    });
+});
+
+(0, _jquery2.default)('.back2').on('click', function () {
+    var isEdit = (0, _jquery2.default)('[node-type="addName"]').prop("disabled");
+    if (isEdit) {
+        (0, _jquery2.default)('[node-type="page2"]').hide();
+        (0, _jquery2.default)('[node-type="page3"]').show();
+        (0, _jquery2.default)('[node-type="page4"]').hide();
+    } else {
+        (0, _jquery2.default)('[node-type="page2"]').show();
+        (0, _jquery2.default)('[node-type="page3"]').hide();
+        (0, _jquery2.default)('[node-type="page4"]').hide();
+    }
 });
 
 /***/ }),

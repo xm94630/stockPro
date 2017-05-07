@@ -39,8 +39,11 @@ function randerData(type,data){
     }
     var html='';
     for(var i=0;i<data.length;i++){
+
+        var p = data[i].isOK?data[i].result+'%':'不合格';
+
         html+= ['<div node-type="more" name="'+data[i].name+'" class="item">',
-          '<div class="floatL">'+data[i].name+' '+data[i].result+'%（'+data[i].date+')'+'</div>',
+          '<div class="floatL">'+data[i].name+' '+p+'（'+data[i].date+')'+'</div>',
           '<div class="floatR" node-type="del" name="'+data[i].name+'">删除</div>',
           '<div class="blankBox"></div>',
         '</div>'].join('');
@@ -98,7 +101,7 @@ function detail(name){
     $('[node-type="stockName"]').text(stockData.name);
     $('[node-type="average"]').text(stockData.result+"%");
     $('.end').css({width:stockData.max<100?stockData.max+'%':'100%'});
-    $('.start').css({width:stockData.min+'%'});
+    $('.start').css({width:stockData.min<100?stockData.min+'%':'100%'});
     var percent = stockData.percent;
     var a1 = percent.split('|')[0];
     var a2 = percent.split('|')[1];
@@ -146,9 +149,10 @@ $($('.bar .tab')[0]).trigger('click');
 
 
 
-$('.back').on('click',function(){
+$('.back1').on('click',function(){
     $('[node-type="page2"]').show();
     $('[node-type="page3"]').hide();
+    $('.tab.active').trigger('click');
 })
 
 $('[node-type="add"]').on('click',function(e,editName){
@@ -165,7 +169,7 @@ $('[node-type="add"]').on('click',function(e,editName){
                 stockData = JSON.parse(JSON.stringify(data[i]));
             }
         }
-        $('[node-type="addName"]').val(stockData.name);
+        $('[node-type="addName"]').val(stockData.name).attr('disabled','disabled');
         $('[node-type="addPrice"]').val(stockData.nowPrice);
         var arr = stockData.price.split('|');
         $('[node-type="addLow1"]').val(arr[0]);
@@ -175,7 +179,7 @@ $('[node-type="add"]').on('click',function(e,editName){
         $('[node-type="addLow5"]').val(arr[4]);
         $('[node-type="addLow6"]').val(arr[5]);
     }else{
-        $('[node-type="addName"]').val('');
+        $('[node-type="addName"]').val('').removeAttr("disabled");
         $('[node-type="addPrice"]').val('');
         $('[node-type="addLow1"]').val('');
         $('[node-type="addLow2"]').val('');
@@ -244,10 +248,29 @@ $('.okBtn').on('click',function(){
         data.push(object);
     }
 
-
-    $('[node-type="page2"]').show();
     $('[node-type="page4"]').hide();
+    $('[node-type="page2"]').show();
+    $('.tab.active').trigger('click');
+    $('[node-type="more"]').each(function(){
+        if($(this).attr('name')==name){
+            $(this).trigger('click');
+        }
+    })
+
 });
+
+$('.back2').on('click',function(){
+    var isEdit = $('[node-type="addName"]').prop("disabled");
+    if(isEdit){
+        $('[node-type="page2"]').hide();
+        $('[node-type="page3"]').show();
+        $('[node-type="page4"]').hide();        
+    }else{
+       $('[node-type="page2"]').show();
+       $('[node-type="page3"]').hide();
+       $('[node-type="page4"]').hide(); 
+    }
+})
 
 
 

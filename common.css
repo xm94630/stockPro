@@ -634,7 +634,9 @@ label span{
   cursor: pointer;
 }
 
-
+input:disabled{
+  color: #ccc;
+}
 
 
 
