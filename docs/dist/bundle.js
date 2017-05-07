@@ -83,7 +83,7 @@ var l = function l() {
     return console.log.apply(console, arguments);
 };
 
-var stocks = JSON.parse(window.localStorage.stock);
+var stocks = window.localStorage.stock ? JSON.parse(window.localStorage.stock) : false;
 var data = stocks || [{
     name: '中国神华',
     nowPrice: '10',
