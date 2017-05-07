@@ -370,7 +370,7 @@ body a {
   line-height: 8rem;
   text-align: center;
   margin:0 auto;
-  margin-top: 30%;
+  margin-top: 25%;
   cursor: pointer;
 }
 
@@ -579,7 +579,7 @@ body a {
 
 .mapBox{
   padding: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 .map div{
   display: inline-block;
@@ -634,11 +634,11 @@ label span{
   cursor: pointer;
 }
 
-input:disabled{
+/*input:disabled{
   color: #ccc;
-}
+}*/
 input.disabledClass{
-  color: #ccc;
+  color: #999;
 }
 
 
