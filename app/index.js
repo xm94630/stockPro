@@ -30,18 +30,41 @@ var data = stocks || [{
 
 
 function selesctDataByType(type,data){
+
+    //排序
+    function compare(property){
+        return function(a,b){
+            var value1 = a[property];
+            var value2 = b[property];
+            return value1 - value2;
+        }
+    }
+    data.sort(compare('result'));
+
     if(type=='0'){
         return data;
     }else if(type=='1'){
-        return data;
+        var newData=[];
+        for(var i=0;i<data.length;i++){
+            if(data[i].isOK){
+                newData.push(data[i]);
+            }
+        }
+        return newData;
     }else if(type=='2'){
-        return data;
+        var newData=[];
+        for(var i=0;i<data.length;i++){
+            if(!data[i].isOK){
+                newData.push(data[i]);
+            }
+        }
+        return newData;
     }
 }
 function randerData(type,data){
     var data = selesctDataByType(type,data);
-    if(data.length==0){
-        $('.wu').show();
+    if(data.length==0){$('.wu').show();}else{
+        $('.wu').hide();
     }
     var html='';
     for(var i=0;i<data.length;i++){
