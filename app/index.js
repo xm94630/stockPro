@@ -178,8 +178,8 @@ $('[node-type="add"]').on('click',function(e,editName){
                 stockData = JSON.parse(JSON.stringify(data[i]));
             }
         }
-        $('[node-type="addName"]').val(stockData.name).attr('disabled','disabled');
-        $('[node-type="addPrice"]').val(stockData.nowPrice);
+        $('[node-type="addName"]').val(stockData.name).attr('disabled','disabled').addClass('disabledClass');
+        $('[node-type="addPrice"]').val(stockData.nowPrice).removeClass('disabledClass');
         var arr = stockData.price.split('|');
         $('[node-type="addLow1"]').val(arr[0]);
         $('[node-type="addLow2"]').val(arr[1]);

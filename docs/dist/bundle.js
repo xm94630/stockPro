@@ -246,8 +246,8 @@ function detail(name) {
                 stockData = JSON.parse(JSON.stringify(data[i]));
             }
         }
-        (0, _jquery2.default)('[node-type="addName"]').val(stockData.name).attr('disabled', 'disabled');
-        (0, _jquery2.default)('[node-type="addPrice"]').val(stockData.nowPrice);
+        (0, _jquery2.default)('[node-type="addName"]').val(stockData.name).attr('disabled', 'disabled').addClass('disabledClass');
+        (0, _jquery2.default)('[node-type="addPrice"]').val(stockData.nowPrice).removeClass('disabledClass');
         var arr = stockData.price.split('|');
         (0, _jquery2.default)('[node-type="addLow1"]').val(arr[0]);
         (0, _jquery2.default)('[node-type="addLow2"]').val(arr[1]);

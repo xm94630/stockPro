@@ -589,7 +589,7 @@ body a {
 .mapItem{
   width: 3rem;
   height: 1.5rem;
-  margin-left: 2.8rem;
+  margin-left: 4.5rem;
   margin-right: 10px;
 }
 .lists{
@@ -635,6 +635,9 @@ label span{
 }
 
 input:disabled{
+  color: #ccc;
+}
+input.disabledClass{
   color: #ccc;
 }
 
