@@ -5,7 +5,7 @@ var data = [];
 data = [{
     name:'中国神华',
     nowPrice:'10',
-    price:'8.8|8.9|4.1|1.3|5.5|6.1|7.1',
+    price:'8.8|8.9|4.1|1.3|5.5|6.1',
     percent:'30|34|38|40|45|60',
     date:'2017/5/1',
     min:'30',
@@ -17,12 +17,12 @@ data = [{
     nowPrice:'10',
     min:'40',
     max:'110',
-    price:'10|8.9|4.1|1.3|5.5|6.1|7.1',
+    price:'10|8.9|4.1|1.3|5.5|6.1',
     percent:'40|50|56|60|120|66',
     date:'2017/5/2',
     isOK:false,
     result:'60'
-},]
+}]
 function selesctDataByType(type,data){
     if(type=='0'){
         return data;
@@ -89,12 +89,18 @@ function detail(name){
     $('.y5').css({left:a5<100?a5+'%':'100%'});
     $('.y6').css({left:a6<100?a6+'%':'100%'});
     l(a1)
-    $('[node-type="v1"]').text(a1<100?a1+'%':'不合格');
-    $('[node-type="v2"]').text(a2<100?a2+'%':'不合格');
-    $('[node-type="v3"]').text(a3<100?a3+'%':'不合格');
-    $('[node-type="v4"]').text(a4<100?a4+'%':'不合格');
-    $('[node-type="v5"]').text(a5<100?a5+'%':'不合格');
-    $('[node-type="v6"]').text(a6<100?a6+'%':'不合格');
+    $('[node-type="v1"]').text(a1<=100?a1+'%':'不合格');
+    $('[node-type="v2"]').text(a2<=100?a2+'%':'不合格');
+    $('[node-type="v3"]').text(a3<=100?a3+'%':'不合格');
+    $('[node-type="v4"]').text(a4<=100?a4+'%':'不合格');
+    $('[node-type="v5"]').text(a5<=100?a5+'%':'不合格');
+    $('[node-type="v6"]').text(a6<=100?a6+'%':'不合格');
+
+    //编辑
+    $('[node-type="stockEdit"]').on('click',function(){
+        $('[node-type="page3"]').hide();
+        $('[node-type="add"]').trigger('click',name);
+    });
 
 }
 
@@ -121,18 +127,41 @@ $('.back').on('click',function(){
     $('[node-type="page3"]').hide();
 })
 
-$('[node-type="add"]').on('click',function(){
+$('[node-type="add"]').on('click',function(e,editName){
+
     $('[node-type="page2"]').hide();
     $('[node-type="page4"]').show();
 
-    $('[node-type="addName"]').val('');
-    $('[node-type="addPrice"]').val('');
-    $('[node-type="addLow1"]').val('');
-    $('[node-type="addLow2"]').val('');
-    $('[node-type="addLow3"]').val('');
-    $('[node-type="addLow4"]').val('');
-    $('[node-type="addLow5"]').val('');
-    $('[node-type="addLow6"]').val('');
+    //如果是编辑状态
+    if(editName){
+
+        var stockData;
+        for(var i=0;i<data.length;i++){
+            if(data[i].name==editName){
+                stockData = JSON.parse(JSON.stringify(data[i]));
+            }
+        }
+        $('[node-type="addName"]').val(stockData.name);
+        $('[node-type="addPrice"]').val(stockData.nowPrice);
+        var arr = stockData.price.split('|');
+        $('[node-type="addLow1"]').val(arr[0]);
+        $('[node-type="addLow2"]').val(arr[1]);
+        $('[node-type="addLow3"]').val(arr[2]);
+        $('[node-type="addLow4"]').val(arr[3]);
+        $('[node-type="addLow5"]').val(arr[4]);
+        $('[node-type="addLow6"]').val(arr[5]);
+    }else{
+        $('[node-type="addName"]').val('');
+        $('[node-type="addPrice"]').val('');
+        $('[node-type="addLow1"]').val('');
+        $('[node-type="addLow2"]').val('');
+        $('[node-type="addLow3"]').val('');
+        $('[node-type="addLow4"]').val('');
+        $('[node-type="addLow5"]').val('');
+        $('[node-type="addLow6"]').val('');
+    }
+
+
 });
 
 $('.okBtn').on('click',function(){
@@ -156,7 +185,7 @@ $('.okBtn').on('click',function(){
 
     var object = {
         name:name,
-        newPrice:price,
+        nowPrice:price,
         price:low1+'|'+low2+'|'+low3+'|'+low4+'|'+low5+'|'+low6,
         date:(new Date()).toLocaleDateString()
     };
@@ -168,18 +197,35 @@ $('.okBtn').on('click',function(){
     var p5 = parseFloat((price*100 / (low5*3.6)).toFixed(1));
     var p6 = parseFloat((price*100 / (low6*4)).toFixed(1));
 
-
-
     object.percent = p1+'|'+p2+'|'+p3+'|'+p4+'|'+p5+'|'+p6;
     object.result = parseFloat(((p1+p2+p3+p4+p5+p6)/6).toFixed(0));
-    l(p1+p2+p3+p4+p5+p6)
-    l((p1+p2+p3+p4+p5+p6)/6)
     object.max = Math.max(p1,p2,p3,p4,p5,p6);
     object.min = Math.min(p1,p2,p3,p4,p5,p6);
-    object.isOK = object.max<=100;
+    object.isOK = object.max<100;
 
-    l(object)
-    data.push(object);
+    var isEdit;
+    var index;
+    for(var i=0;i<data.length;i++){
+        if(data[i].name==name){
+            l(1)
+            isEdit = true;
+            index=i;
+            break;
+        }else{
+            l(2)
+            isEdit = false;
+        }
+    }
+    if(isEdit){
+        l(11)
+        l(object)
+        data[i] = object;
+    }else{
+        l(222)
+        data.push(object);
+    }
+
+    l(data);
 
     $('[node-type="page2"]').show();
     $('[node-type="page4"]').hide();
