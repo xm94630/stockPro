@@ -179,7 +179,7 @@ $('[node-type="add"]').on('click',function(e,editName){
             }
         }
         $('[node-type="addName"]').val(stockData.name).attr('disabled','disabled').addClass('disabledClass');
-        $('[node-type="addPrice"]').val(stockData.nowPrice).removeClass('disabledClass');
+        $('[node-type="addPrice"]').val(stockData.nowPrice);
         var arr = stockData.price.split('|');
         $('[node-type="addLow1"]').val(arr[0]);
         $('[node-type="addLow2"]').val(arr[1]);
@@ -187,8 +187,10 @@ $('[node-type="add"]').on('click',function(e,editName){
         $('[node-type="addLow4"]').val(arr[3]);
         $('[node-type="addLow5"]').val(arr[4]);
         $('[node-type="addLow6"]').val(arr[5]);
+
+        $('[node-type="add/edit"]').text('编辑股票')
     }else{
-        $('[node-type="addName"]').val('').removeAttr("disabled");
+        $('[node-type="addName"]').val('').removeAttr("disabled").removeClass('disabledClass');
         $('[node-type="addPrice"]').val('');
         $('[node-type="addLow1"]').val('');
         $('[node-type="addLow2"]').val('');
@@ -196,6 +198,8 @@ $('[node-type="add"]').on('click',function(e,editName){
         $('[node-type="addLow4"]').val('');
         $('[node-type="addLow5"]').val('');
         $('[node-type="addLow6"]').val('');
+
+        $('[node-type="add/edit"]').text('新建股票')
     }
 
 
