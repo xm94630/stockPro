@@ -83,8 +83,8 @@ var l = function l() {
     return console.log.apply(console, arguments);
 };
 
-var data = [];
-data = [{
+var stocks = JSON.parse(window.localStorage.stock);
+var data = stocks || [{
     name: '中国神华',
     nowPrice: '10',
     price: '8.8|8.9|4.1|1.3|5.5|6.1',
@@ -105,6 +105,7 @@ data = [{
     isOK: false,
     result: '60'
 }];
+
 function selesctDataByType(type, data) {
     if (type == '0') {
         return data;
@@ -155,6 +156,9 @@ function randerData(type, data) {
                 if ((0, _jquery2.default)('[node-type="more"]').length == 0) {
                     (0, _jquery2.default)('.wu').show();
                 }
+
+                //删除 存到localStorage
+                window.localStorage.stock = JSON.stringify(data);
             }
         });
     });
@@ -343,6 +347,9 @@ function detail(name) {
             (0, _jquery2.default)(this).trigger('click');
         }
     });
+
+    //添加 存到localStorage
+    window.localStorage.stock = JSON.stringify(data);
 });
 
 (0, _jquery2.default)('.back2').on('click', function () {

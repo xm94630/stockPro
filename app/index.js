@@ -1,8 +1,8 @@
 import $ from 'jquery';
 var l = function(){return console.log.apply(console,arguments)}
 
-var data = [];
-data = [{
+var stocks = JSON.parse(window.localStorage.stock);
+var data = stocks || [{
     name:'中国神华',
     nowPrice:'10',
     price:'8.8|8.9|4.1|1.3|5.5|6.1',
@@ -22,7 +22,13 @@ data = [{
     date:'2017/5/2',
     isOK:false,
     result:'60'
-}]
+}];
+
+
+
+
+
+
 function selesctDataByType(type,data){
     if(type=='0'){
         return data;
@@ -77,6 +83,9 @@ function randerData(type,data){
                 if($('[node-type="more"]').length==0){
                     $('.wu').show();
                 }
+
+                //删除 存到localStorage
+                window.localStorage.stock = JSON.stringify(data);
             }
         })
     })
@@ -257,6 +266,8 @@ $('.okBtn').on('click',function(){
         }
     })
 
+    //添加 存到localStorage
+    window.localStorage.stock = JSON.stringify(data);
 });
 
 $('.back2').on('click',function(){
@@ -271,7 +282,6 @@ $('.back2').on('click',function(){
        $('[node-type="page4"]').hide(); 
     }
 })
-
 
 
 
