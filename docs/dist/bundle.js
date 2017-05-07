@@ -107,18 +107,43 @@ var data = stocks || [{
 }];
 
 function selesctDataByType(type, data) {
+
+    //排序
+    function compare(property) {
+        return function (a, b) {
+            var value1 = a[property];
+            var value2 = b[property];
+            return value1 - value2;
+        };
+    }
+    data.sort(compare('result'));
+
     if (type == '0') {
         return data;
     } else if (type == '1') {
-        return data;
+        var newData = [];
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].isOK) {
+                newData.push(data[i]);
+            }
+        }
+        return newData;
     } else if (type == '2') {
-        return data;
+        var newData = [];
+        for (var i = 0; i < data.length; i++) {
+            if (!data[i].isOK) {
+                newData.push(data[i]);
+            }
+        }
+        return newData;
     }
 }
 function randerData(type, data) {
     var data = selesctDataByType(type, data);
     if (data.length == 0) {
         (0, _jquery2.default)('.wu').show();
+    } else {
+        (0, _jquery2.default)('.wu').hide();
     }
     var html = '';
     for (var i = 0; i < data.length; i++) {
@@ -247,7 +272,7 @@ function detail(name) {
             }
         }
         (0, _jquery2.default)('[node-type="addName"]').val(stockData.name).attr('disabled', 'disabled').addClass('disabledClass');
-        (0, _jquery2.default)('[node-type="addPrice"]').val(stockData.nowPrice).removeClass('disabledClass');
+        (0, _jquery2.default)('[node-type="addPrice"]').val(stockData.nowPrice);
         var arr = stockData.price.split('|');
         (0, _jquery2.default)('[node-type="addLow1"]').val(arr[0]);
         (0, _jquery2.default)('[node-type="addLow2"]').val(arr[1]);
@@ -255,8 +280,10 @@ function detail(name) {
         (0, _jquery2.default)('[node-type="addLow4"]').val(arr[3]);
         (0, _jquery2.default)('[node-type="addLow5"]').val(arr[4]);
         (0, _jquery2.default)('[node-type="addLow6"]').val(arr[5]);
+
+        (0, _jquery2.default)('[node-type="add/edit"]').text('编辑股票');
     } else {
-        (0, _jquery2.default)('[node-type="addName"]').val('').removeAttr("disabled");
+        (0, _jquery2.default)('[node-type="addName"]').val('').removeAttr("disabled").removeClass('disabledClass');
         (0, _jquery2.default)('[node-type="addPrice"]').val('');
         (0, _jquery2.default)('[node-type="addLow1"]').val('');
         (0, _jquery2.default)('[node-type="addLow2"]').val('');
@@ -264,6 +291,8 @@ function detail(name) {
         (0, _jquery2.default)('[node-type="addLow4"]').val('');
         (0, _jquery2.default)('[node-type="addLow5"]').val('');
         (0, _jquery2.default)('[node-type="addLow6"]').val('');
+
+        (0, _jquery2.default)('[node-type="add/edit"]').text('新建股票');
     }
 });
 
