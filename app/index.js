@@ -29,7 +29,7 @@ var data = stocks || [{
 
 
 
-function selesctDataByType(type,data){
+function selesctDataByType(type,copyData){
 
     //排序 方案1
     /*function compare(property){
@@ -39,7 +39,7 @@ function selesctDataByType(type,data){
             return value1 - value2;
         }
     }
-    data.sort(compare('result'));*/
+    copyData.sort(compare('result'));*/
 
     //排序 方案2
     function compare(property){
@@ -53,20 +53,20 @@ function selesctDataByType(type,data){
     if(type=='0'){
         return data;
     }else if(type=='1'){
-        data.sort(compare('percent'));
+        copyData.sort(compare('percent'));
         var newData=[];
-        for(var i=0;i<data.length;i++){
-            if(data[i].isOK){
-                newData.push(data[i]);
+        for(var i=0;i<copyData.length;i++){
+            if(copyData[i].isOK){
+                newData.push(copyData[i]);
             }
         }
         return newData;
     }else if(type=='2'){
-        data.sort(compare('percent'));
+        copyData.sort(compare('percent'));
         var newData=[];
-        for(var i=0;i<data.length;i++){
-            if(!data[i].isOK){
-                newData.push(data[i]);
+        for(var i=0;i<copyData.length;i++){
+            if(!copyData[i].isOK){
+                newData.push(copyData[i]);
             }
         }
         return newData;
@@ -75,7 +75,8 @@ function selesctDataByType(type,data){
 
 
 function randerData(type,data){
-    var data2 = selesctDataByType(type,data);
+    var copydata = JSON.parse(JSON.stringify(data))
+    var data2 = selesctDataByType(type,copydata);
     if(data2.length==0){$('.wu').show();}else{
         $('.wu').hide();
     }
