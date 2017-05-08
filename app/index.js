@@ -3,25 +3,35 @@ var l = function(){return console.log.apply(console,arguments)}
 
 var stocks = window.localStorage.stock?JSON.parse(window.localStorage.stock):false;
 var data = stocks || [{
-    name:'中国神华',
-    nowPrice:'10',
-    price:'8.8|8.9|4.1|1.3|5.5|6.1',
-    percent:'30|34|38|40|45|60',
-    date:'2017/5/1',
-    min:'30',
-    max:'60',
-    isOK:true,
-    result:'45'
-},{
     name:'华西股份',
-    nowPrice:'10',
-    min:'40',
-    max:'110',
-    price:'10|8.9|4.1|1.3|5.5|6.1',
-    percent:'40|50|56|60|120|66',
-    date:'2017/5/2',
+    nowPrice:'7.66',
+    price:'7.61|6.64|3.39|3.09|3.09|3.09',
+    percent:'50.3|48.1|80.7|77.5|68.9|62',
+    date:'2017/5/7',
+    min:'48.1',
+    max:'80.7',
+    isOK:true,
+    result:'65'
+},{
+    name:'上海能源',
+    nowPrice:'10.84',
+    min:'35.8',
+    max:'63',
+    price:'8.6|8.21|7.57|7.57|7.57|7.57',
+    percent:'63|55|51.1|44.7|39.8|35.8',
+    date:'2017/5/7',
+    isOK:true,
+    result:'48'
+},{
+    name:'华鲁恒升',
+    nowPrice:'13.25',
+    min:'73.9',
+    max:'999',
+    price:'8.28|7.47|4.86|3.69|3.69|3.69',
+    percent:'80|73.9|97.4|999|99.7|89.8',
+    date:'2017/5/7',
     isOK:false,
-    result:'60'
+    result:'48'
 }];
 
 
