@@ -62,18 +62,18 @@ function selesctDataByType(type,data){
     }
 }
 function randerData(type,data){
-    var data = selesctDataByType(type,data);
-    if(data.length==0){$('.wu').show();}else{
+    var data2 = selesctDataByType(type,data);
+    if(data2.length==0){$('.wu').show();}else{
         $('.wu').hide();
     }
     var html='';
-    for(var i=0;i<data.length;i++){
+    for(var i=0;i<data2.length;i++){
 
-        var p = data[i].isOK?data[i].result+'%':'不合格';
+        var p = data2[i].isOK?data2[i].result+'%':'不合格';
 
-        html+= ['<div node-type="more" name="'+data[i].name+'" class="item">',
-          '<div class="floatL">'+data[i].name+' '+p+'（'+data[i].date+')'+'</div>',
-          '<div class="floatR" node-type="del" name="'+data[i].name+'">删除</div>',
+        html+= ['<div node-type="more" name="'+data2[i].name+'" class="item">',
+          '<div class="floatL">'+data2[i].name+' '+p+'（'+data2[i].date+')'+'</div>',
+          '<div class="floatR" node-type="del" name="'+data2[i].name+'">删除</div>',
           '<div class="blankBox"></div>',
         '</div>'].join('');
     }
@@ -92,12 +92,16 @@ function randerData(type,data){
             var name = $(this).attr('name');
             var a=confirm("确认要删除？");
             if(a==true){
-                var stockData;
+
+                //删除数据
                 for(var i=0;i<data.length;i++){
                     if(data[i].name==name){
                         data.splice(i,1);
+                        break;
                     }
                 }
+
+                //删除dom
                 $('[node-type="more"]').each(function(){
                     if($(this).attr('name')==name){
                         $(this).remove();
