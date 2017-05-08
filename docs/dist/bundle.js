@@ -108,19 +108,29 @@ var data = stocks || [{
 
 function selesctDataByType(type, data) {
 
-    //排序
-    function compare(property) {
-        return function (a, b) {
+    //排序 方案1
+    /*function compare(property){
+        return function(a,b){
             var value1 = a[property];
             var value2 = b[property];
             return value1 - value2;
+        }
+    }
+    data.sort(compare('result'));*/
+
+    //排序 方案2
+    function compare(property) {
+        return function (a, b) {
+            var value1 = a[property].split('|')[0];
+            var value2 = b[property].split('|')[0];
+            return value1 - value2;
         };
     }
-    data.sort(compare('result'));
 
     if (type == '0') {
         return data;
     } else if (type == '1') {
+        data.sort(compare('percent'));
         var newData = [];
         for (var i = 0; i < data.length; i++) {
             if (data[i].isOK) {
@@ -129,6 +139,7 @@ function selesctDataByType(type, data) {
         }
         return newData;
     } else if (type == '2') {
+        data.sort(compare('percent'));
         var newData = [];
         for (var i = 0; i < data.length; i++) {
             if (!data[i].isOK) {
@@ -138,6 +149,7 @@ function selesctDataByType(type, data) {
         return newData;
     }
 }
+
 function randerData(type, data) {
     var data2 = selesctDataByType(type, data);
     if (data2.length == 0) {
@@ -149,7 +161,7 @@ function randerData(type, data) {
     for (var i = 0; i < data2.length; i++) {
 
         var p = data2[i].isOK ? data2[i].result + '%' : '不合格';
-        var bgColor = data2[i].isOK ? 'green' : 'red';
+        var bgColor = data2[i].isOK ? 'red' : 'green';
 
         html += ['<div node-type="more" name="' + data2[i].name + '" class="item ' + bgColor + '">', '<div class="floatL listLeftCon">' + data2[i].name + ' ' + p + '（' + data2[i].date + ')' + '</div>', '<div class="floatR" node-type="del" name="' + data2[i].name + '">删除</div>', '<div class="blankBox"></div>', '</div>'].join('');
     }
