@@ -440,6 +440,13 @@ body a {
 .item{
   padding:1rem;
   border-bottom:solid 1px #333;
+  overflow: hidden;
+}
+.item.green{
+  background: darkseagreen;
+}
+.item.red{
+  background: #f1838d;
 }
 .wu{
   padding:1rem;
@@ -640,7 +647,10 @@ input.disabledClass{
   color: #999;
 }
 
-
+.listLeftCon{
+  max-width: 80%;
+  line-height: 
+}
 
 
 

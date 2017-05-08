@@ -149,8 +149,9 @@ function randerData(type, data) {
     for (var i = 0; i < data2.length; i++) {
 
         var p = data2[i].isOK ? data2[i].result + '%' : '不合格';
+        var bgColor = data2[i].isOK ? 'green' : 'red';
 
-        html += ['<div node-type="more" name="' + data2[i].name + '" class="item">', '<div class="floatL">' + data2[i].name + ' ' + p + '（' + data2[i].date + ')' + '</div>', '<div class="floatR" node-type="del" name="' + data2[i].name + '">删除</div>', '<div class="blankBox"></div>', '</div>'].join('');
+        html += ['<div node-type="more" name="' + data2[i].name + '" class="item ' + bgColor + '">', '<div class="floatL listLeftCon">' + data2[i].name + ' ' + p + '（' + data2[i].date + ')' + '</div>', '<div class="floatR" node-type="del" name="' + data2[i].name + '">删除</div>', '<div class="blankBox"></div>', '</div>'].join('');
     }
     (0, _jquery2.default)('.lists').html('').append(html);
 
